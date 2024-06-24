@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: f2dcd629c3348b345974a7029ec6a9b4
+  - enabled: 1
+    path: Assets/Scenes/2W Bike Dashboard.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/FixedData.unity
+    guid: 659a136cf2e91e24ca14951f7848f6a7
+  m_configObjects: {}
