@@ -10,6 +10,8 @@ public class TwoWheelCostManager : MonoBehaviour
 {
     public static TwoWheelCostManager instance;
 
+    [SerializeField] bool initialBikeCostsAdded = false;
+
     [SerializeField] BarChart fuelCostBarChart;
     [SerializeField] SimplifiedLineChart yearlyLineChart;
     [SerializeField] Slider distancePerDaySlider;
@@ -82,7 +84,8 @@ public class TwoWheelCostManager : MonoBehaviour
     [SerializeField] int kmInTotalYears;
     [SerializeField] int batteryReplacementCost = 130000;
 
-    [SerializeField] int totalYearsFuelBikeCosts, totalYearsEbikeCosts;
+    [SerializeField] float totalYearsFuelBikeCosts; 
+    [SerializeField] float totalYearsEbikeCosts;
 
     [SerializeField] float monthlySavedAmount, yearlySavedAmount, petrolCostPerMonth, eCostPerMonth;
     [SerializeField] float monthlySavedPercent, yearlySavedPercent;
@@ -94,8 +97,7 @@ public class TwoWheelCostManager : MonoBehaviour
     [SerializeField] float batteryCapInKwh = 1f;
     
 
-    [SerializeField] int totalYearsFuelCostPerKm, totalYearsElectricCostPerKm, totalYearsSavedAmount;
-
+    [SerializeField] float totalYearsElectricCostPerKm, totalYearsSavedAmount, totalYearsFuelCostPerKm;
 
     private Serie fuelCostSerie, electricityCostSerie;
 
@@ -149,21 +151,30 @@ public class TwoWheelCostManager : MonoBehaviour
 
         double fuelCost, costPerDay ;
         costPerDay = distancePerDaySlider.value / mileageSlider.value * petrolCostPerDaySlider.value;
-        fuelCost = (costPerDay * 30 ) + monthlyPetrolBikeMaintenanceCostSlider.value;
+        fuelCost = (costPerDay * 30.0f ) + monthlyPetrolBikeMaintenanceCostSlider.value;
 
-        petrolCostPerMonth = (int)fuelCost;
+        petrolCostPerMonth = (float)fuelCost;
 
-        monthlyFuelCostPerKm = petrolCostPerMonth / ( distancePerDaySlider.value * 30 );
+        monthlyFuelCostPerKm = petrolCostPerMonth / ( distancePerDaySlider.value * 30.0f );
 
         monthlyFuelCostPerKmText.text = "Rs " + monthlyFuelCostPerKm.ToString("0.0");
 
-        yearlyFuelCost = 12 * (int)petrolCostPerMonth;
+        yearlyFuelCost = 12.0f * petrolCostPerMonth;
 
-        
+        if (initialBikeCostsAdded == true)
+        {
+            //yearlyFuelCostsList[0] = initialFuelBikeCost + yearlyFuelCost;          //cost with added initial fuel bike purchasing cost
+            yearlyFuelCostsList[0] = initialFuelBikeCost;
+        }
+        else
+        {
+            //yearlyFuelCostsList[0] = yearlyFuelCost;                                //first year cost excluding initial fuel bike purchasing cost
+            yearlyFuelCostsList[0] = 0;
+        }
 
 
-        yearlyFuelCostsList[0] = initialFuelBikeCost;
-        accYearlyFuelCost = (int)yearlyFuelCostsList[0];
+
+        accYearlyFuelCost = (float)yearlyFuelCostsList[0];
         for (int i = 1; i < numberOfYears; i++)
         {
             //float a = 1f;
@@ -176,7 +187,7 @@ public class TwoWheelCostManager : MonoBehaviour
             
         }
 
-        totalYearsFuelBikeCosts = (int)yearlyFuelCostsList[numberOfYears - 1];
+        totalYearsFuelBikeCosts = (float)yearlyFuelCostsList[numberOfYears - 1];
 
         return fuelCost;
     }
@@ -193,17 +204,28 @@ public class TwoWheelCostManager : MonoBehaviour
         costPerDay = distancePerDaySlider.value / mileageSlider.value * electricityCostPerDaySlider.value;
         eCost = (costPerDay * 30 * batteryCapInKwh ) + monthlyElectricBikeMaintenanceCostSlider.value;
 
-        eCostPerMonth = (int)eCost;
+        eCostPerMonth = (float)eCost;
 
 
         monthlyElectricCostPerKm = eCostPerMonth / ( distancePerDaySlider.value * 30 );
 
         monthlyElectricityCostPerKmText.text = "Rs " + monthlyElectricCostPerKm.ToString("0.0");
 
-        yearlyEbikeCost = 12 * (int)eCostPerMonth;
+        yearlyEbikeCost = 12 * eCostPerMonth;
 
-        yearlyEBikeCostsList[0] = initialEBikeCost;
-        accYearlyeBikeCost = (int)yearlyEBikeCostsList[0];
+        if (initialBikeCostsAdded == true)
+        {
+           // yearlyEBikeCostsList[0] = yearlyEbikeCost + initialEBikeCost;          //cost with added initial electric bike cost
+              yearlyEBikeCostsList[0] = initialEBikeCost;
+        }
+        else
+        {
+            //yearlyEBikeCostsList[0] = yearlyEbikeCost;               //first year cost excluding initial Electric bike cost
+              yearlyEBikeCostsList[0] = 0;
+        }
+
+
+        accYearlyeBikeCost = (float)yearlyEBikeCostsList[0];
 
         for (int i = 1; i < numberOfYears; i++)
         {
@@ -223,7 +245,7 @@ public class TwoWheelCostManager : MonoBehaviour
         }
 
 
-        totalYearsEbikeCosts = (int)yearlyEBikeCostsList[numberOfYears - 1];
+        totalYearsEbikeCosts = (float)yearlyEBikeCostsList[numberOfYears - 1];
 
         return eCost;
     }
@@ -273,7 +295,7 @@ public class TwoWheelCostManager : MonoBehaviour
         totalYearsElectricCostPerKm = totalYearsEbikeCosts / kmInTotalYears;
 
         totalYearsSavedAmount = totalYearsFuelBikeCosts - totalYearsEbikeCosts;
-        totalYearsSavedPercent = ((float)totalYearsSavedAmount / (float)totalYearsFuelBikeCosts ) * 100;
+        totalYearsSavedPercent = (totalYearsSavedAmount / totalYearsFuelBikeCosts ) * 100;
 
         totalYearsSavedPercentText.text = totalYearsSavedPercent.ToString("0.0") + "%" + " Saved";
         totalYearsSavedAmountText.text = "Rs " + totalYearsSavedAmount.ToString() + " Saved";
@@ -349,12 +371,12 @@ public class TwoWheelCostManager : MonoBehaviour
 
     void DailySummaryPanel()
     {
-        monthlyMileage = (int)mileageSlider.value * 30;
+        monthlyMileage = (int)distancePerDaySlider.value * 30;
 
         dailyElectricCostText.text = "Rs " + electricityCostPerDaySlider.value.ToString() + " per charge";
         dailyPetrolCostText.text = "Rs " + petrolCostPerDaySlider.value.ToString() + " per litre";
 
-        dailyMileageText.text = "Costs for Daily Mileage of " + mileageSlider.value.ToString() + " km";
+        dailyMileageText.text = "Costs for Daily Mileage of " + distancePerDaySlider.value.ToString() + " km";
         monthlyMileageText.text = "Costs for Monthly Mileage of " + monthlyMileage.ToString() + " km";
 
         monthlyFuelCostText.text = "Rs " + petrolCostPerMonth.ToString("0");
@@ -363,9 +385,9 @@ public class TwoWheelCostManager : MonoBehaviour
         monthlyPetrolMaintenanceCostText.text = "Rs " + monthlyPetrolBikeMaintenanceCostSlider.value.ToString();
         monthlyElectricMaintenanceCostText.text = "Rs " + monthlyElectricBikeMaintenanceCostSlider.value.ToString();
 
-
-        totalMonthlyElectricCosts = eCostPerMonth + monthlyElectricBikeMaintenanceCostSlider.value;
-        totalMonthlyPetrolCosts = petrolCostPerMonth + monthlyPetrolBikeMaintenanceCostSlider.value;
+        
+        totalMonthlyElectricCosts = eCostPerMonth /*+ monthlyElectricBikeMaintenanceCostSlider.value*/;
+        totalMonthlyPetrolCosts = petrolCostPerMonth /*+ monthlyPetrolBikeMaintenanceCostSlider.value*/;
 
         monthlySavings = totalMonthlyPetrolCosts - totalMonthlyElectricCosts;
 
