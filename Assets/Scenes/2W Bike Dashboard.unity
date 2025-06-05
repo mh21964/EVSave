@@ -6290,7 +6290,7 @@ RectTransform:
   m_Children:
   - {fileID: 353593263}
   m_Father: {fileID: 1299464031}
-  m_RootOrder: 19
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -10804,7 +10804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliderValueText: {fileID: 1510234955}
   costManager: {fileID: 1736834295}
-  slider: {fileID: 0}
+  slider: {fileID: 412114597}
   minimumValue: 20
   maximumValue: 65
   normalValue: 35
@@ -11016,7 +11016,7 @@ RectTransform:
   - {fileID: 1987290093}
   - {fileID: 1829059887}
   m_Father: {fileID: 1585217705}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -24758,7 +24758,7 @@ RectTransform:
   m_Children:
   - {fileID: 690718512}
   m_Father: {fileID: 1585217705}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -34630,7 +34630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliderValueText: {fileID: 2109820919}
   costManager: {fileID: 1736834295}
-  slider: {fileID: 0}
+  slider: {fileID: 1149047348}
   minimumValue: 20
   maximumValue: 80
   normalValue: 50
@@ -41586,8 +41586,8 @@ RectTransform:
   - {fileID: 59306269}
   - {fileID: 852165522}
   - {fileID: 908795047}
-  - {fileID: 2066601163}
   - {fileID: 255705565}
+  - {fileID: 2066601163}
   m_Father: {fileID: 1764217874}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49377,7 +49377,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliderValueText: {fileID: 321158242}
   costManager: {fileID: 1736834295}
-  slider: {fileID: 0}
+  slider: {fileID: 1511552459}
   minimumValue: 200
   maximumValue: 500
   normalValue: 330
@@ -51796,7 +51796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sliderValueText: {fileID: 1496638538}
   costManager: {fileID: 1736834295}
-  slider: {fileID: 0}
+  slider: {fileID: 1560556398}
   minimumValue: 20
   maximumValue: 60
   normalValue: 40
@@ -52335,8 +52335,8 @@ RectTransform:
   - {fileID: 1025847112}
   - {fileID: 1795206807}
   - {fileID: 1116084733}
-  - {fileID: 414980559}
   - {fileID: 830936471}
+  - {fileID: 414980559}
   m_Father: {fileID: 814794281}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -57221,6 +57221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d04354b23ec6900488e520a2f76f3dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialBikeCostsAdded: 1
   fuelCostBarChart: {fileID: 1585217707}
   yearlyLineChart: {fileID: 1299464033}
   distancePerDaySlider: {fileID: 412114597}
@@ -57306,9 +57307,9 @@ MonoBehaviour:
   totalYearsSavedPercent: 0
   inflationRate: 1
   batteryCapInKwh: 1.5
-  totalYearsFuelCostPerKm: 0
   totalYearsElectricCostPerKm: 0
   totalYearsSavedAmount: 0
+  totalYearsFuelCostPerKm: 0
 --- !u!224 &1736834297
 RectTransform:
   m_ObjectHideFlags: 0
@@ -66878,7 +66879,7 @@ RectTransform:
   - {fileID: 2114054617}
   - {fileID: 1284534394}
   m_Father: {fileID: 1299464031}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
